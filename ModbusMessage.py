@@ -3,8 +3,7 @@ from typing import List
 from enum import IntEnum
 import minimalmodbus
 import click
-import sys
-import math
+import sys, os
 
 
 class  Action(IntEnum):
@@ -135,11 +134,18 @@ def convert_to_list(i:int) -> list:
 @click.option('--text', '-t', type=str, default = "", help = 'test for write text command')
 @click.option('--data', '-d', type= int, multiple=True)
 @click.option('--longdata', '-D', type= int, default = 0, help = 'data (for set HWID)')
-@click.option('--ComPort', '-P', type=str, default = '/dev/ttyS0', help='Comm port name')
+@click.option('--ComPort', '-P', type=str, default = '', help='Comm port name')
 @click.option('--Baudrate', '-r', type=int, default = 38400, help='Communication baud rate')
 @click.option('--Verbose', '-V', is_flag=True, help='Show aditional modbus details')   
 
 def main(address:int, command:str, start:int, count:int, text:str, data, comport:str, baudrate:int, verbose:bool, longdata:int):
+    if comport == '':
+        env_comport = os.getenv('RS485_COMPORT')
+        if env_comport is not None:
+            comport = env_comport
+        else:
+            comport = '/dev/ttyS0'
+    
     if longdata > 0:
         # longdata = hex(longdata)
         data = [0] * count

@@ -7,8 +7,8 @@ import click
 @click.option('--ComPort', '-P', type=str, default = '/dev/ttyS0', help='Comm port name')
 @click.option('--Baudrate', '-r', type=int, default = 38400, help='Communication baud rate')
 @click.option('--Verbose', '-V', is_flag=True, help='Show aditional modbus details')   
-def main(address:int, comport:int, baudrate:int, verbose):
-    params = ['-a', address, '-c', 'wreg', '-s', '24', '-d', '3','-P', comport, '-r', baudrate]
+def main(address:int, comport:int, baudrate:int, verbose:bool):
+    params = ['-a', address, '-c', 'wreg', '-s', '52', '-d', '1','-P', comport, '-r', baudrate]
     if verbose:
         params.append('-V')
     ModbusMessage.main(params)
