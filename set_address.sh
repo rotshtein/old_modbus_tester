@@ -5,4 +5,4 @@ if [[ $# -ne 1 ]];
     exit
 fi
 
-sudo ./ModbusMessage.py -a 0 -c wreg -s 38 -d %1 -V
+sudo ./ModbusMessage.py -a 0 -c wreg -s 38 -d %1  -P $RS485_COMPORT -V
