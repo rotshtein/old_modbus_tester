@@ -3,4 +3,4 @@ if [[ $# -ne 2 ]];
     then echo "illegal number of parameters: $0 <address> <hw version>"
     exit
 fi
-sudo python3 ModbusMessage.py -a $1 -c wreg -s 34 -d $2  -P $RS485_COMPORT
+./ModbusMessage.py -a $1 -c wreg -s 34 -d $2  -P $RS485_COMPORT
