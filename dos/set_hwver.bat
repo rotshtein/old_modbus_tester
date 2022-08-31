@@ -10,7 +10,7 @@ if %argCount% LSS 2 (
     goto :EOF
 )
 
-python ModbusMessage.py -a %1 -c wreg -s 34 -d %2 -P %RS485_COMPORT%
+python ..\ModbusMessage.py -a %1 -c wreg -s 34 -d %2 -P %RS485_COMPORT%
 
 
 :EOF
