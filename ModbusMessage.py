@@ -127,24 +127,24 @@ def convert_to_list(i:int) -> list:
     return l
 
 @click.command()
-@click.option('--address','-a', type=int, default=1, help='VMA modbus address')
+@click.option('--address','-a', type=int, default=250, help='VMA modbus address')
 @click.option('--command','-c', type=click.Choice(['rbit', 'wbit', 'rbits', 'wbits', 'rreg', 'wreg', 'rlong','wlong','rfloat','wfloat', 'rstr', 'wstr', 'rregs', 'wregs'], case_sensitive=False), help='Modbus function')
 @click.option('--start', '-s', type=int, default = 0, help = 'start register')
 @click.option('--count', '-o', type=int, default = 1, help = 'number of registers/bits')
 @click.option('--text', '-t', type=str, default = "", help = 'test for write text command')
 @click.option('--data', '-d', type= int, multiple=True)
 @click.option('--longdata', '-D', type= int, default = 0, help = 'data (for set HWID)')
-@click.option('--ComPort', '-P', type=str, default = '', help='Comm port name')
+@click.option('--ComPort', '-P', type=str, help='Comm port name')
 @click.option('--Baudrate', '-r', type=int, default = 38400, help='Communication baud rate')
 @click.option('--Verbose', '-V', is_flag=True, help='Show aditional modbus details')   
 
 def main(address:int, command:str, start:int, count:int, text:str, data, comport:str, baudrate:int, verbose:bool, longdata:int):
-    if comport == '':
+    if comport is None:
         env_comport = os.getenv('RS485_COMPORT')
         if env_comport is not None:
             comport = env_comport
         else:
-            comport = '/dev/ttyS0'
+            comport = '/dev/ttyS2'
     
     if longdata > 0:
         # longdata = hex(longdata)
