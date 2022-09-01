@@ -136,9 +136,10 @@ def convert_to_list(i:int) -> list:
 @click.option('--longdata', '-D', type= int, default = 0, help = 'data (for set HWID)')
 @click.option('--ComPort', '-P', type=str, help='Comm port name')
 @click.option('--Baudrate', '-r', type=int, default = 38400, help='Communication baud rate')
+@click.option('--quite', '-q', is_flag=True, help='Do not print results')
 @click.option('--Verbose', '-V', is_flag=True, help='Show aditional modbus details')   
 
-def main(address:int, command:str, start:int, count:int, text:str, data, comport:str, baudrate:int, verbose:bool, longdata:int):
+def main(address:int, command:str, start:int, count:int, text:str, data, comport:str, baudrate:int, verbose:bool, longdata:int, quite:bool) -> object:
     if comport is None:
         env_comport = os.getenv('RS485_COMPORT')
         if env_comport is not None:
@@ -155,10 +156,18 @@ def main(address:int, command:str, start:int, count:int, text:str, data, comport
     p = ModbusMessage(address=address, Debug=verbose, ComPort=comport, baud_rate = baudrate)
     try:
         r = p.send(Action = get_action(command), start_address = start, count = count, data_list = list(data), text = text)
-        print (r)
+        print(r)
+        #if quite == False:
+        #    print (r)
+        #else:
+        #    return r
+
     except Exception as ex:
         print (str(ex), file=sys.stderr)
-    
+        #if quite == False:
+        #    print (str(ex), file=sys.stderr)
+        #else:
+        #    return str(ex)
     
 
 if __name__ == '__main__':
