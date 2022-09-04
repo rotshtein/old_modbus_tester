@@ -156,18 +156,18 @@ def main(address:int, command:str, start:int, count:int, text:str, data, comport
     p = ModbusMessage(address=address, Debug=verbose, ComPort=comport, baud_rate = baudrate)
     try:
         r = p.send(Action = get_action(command), start_address = start, count = count, data_list = list(data), text = text)
-        print(r)
-        #if quite == False:
-        #    print (r)
-        #else:
-        #    return r
+        #print(r)
+        if quite == False:
+            print (r)
+        else:
+            return r
 
     except Exception as ex:
-        print (str(ex), file=sys.stderr)
-        #if quite == False:
-        #    print (str(ex), file=sys.stderr)
-        #else:
-        #    return str(ex)
+        #print (str(ex), file=sys.stderr)
+        if quite == False:
+            print (str(ex), file=sys.stderr)
+        else:
+            return str(ex)
     
 
 if __name__ == '__main__':

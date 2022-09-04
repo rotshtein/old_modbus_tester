@@ -8,7 +8,7 @@ import click
 @click.option('--Baudrate', '-r', type=int,  help='Communication baud rate')
 @click.option('--Verbose', '-V', is_flag=True, help='Show aditional modbus details')   
 def main(address:int, comport:int, baudrate:int, verbose:bool):
-    params = ['-a', address, '-c', 'wreg', '-s', '38', '-d', 0]
+    params = ['-a', address, '-c', 'wreg', '-s', '38', '-d', 0, '-q']
     if comport is not None:
         params.append('-P') 
         params.append(comport)
@@ -17,7 +17,8 @@ def main(address:int, comport:int, baudrate:int, verbose:bool):
         params.append(str(baudrate))
     if verbose:
         params.append('-V')
-    ModbusMessage.main(params)
+    ret = ModbusMessage.main(params, standalone_mode=False)
+    print (ret)
 
 if __name__ == '__main__':
     main()

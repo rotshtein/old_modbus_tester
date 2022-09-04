@@ -14,7 +14,7 @@ def convert_to_data_list(id:str) -> List:
 @click.option('--Verbose', '-V', is_flag=True, help='Show aditional modbus details')   
 def main(hwid:str, comport:int, baudrate:int, verbose:bool):
     data_list = convert_to_data_list(hwid)
-    params = ['-a', 0, '-c', 'wregs', '-s', '0', '-o', '8']
+    params = ['-a', 0, '-c', 'wregs', '-s', '0', '-o', '8', '-q']
     for data_param in data_list:
         params.extend(['-d', data_param])
     
@@ -26,7 +26,7 @@ def main(hwid:str, comport:int, baudrate:int, verbose:bool):
         params.append(str(baudrate))
     if verbose:
         params.append('-V')
-    ret = ModbusMessage.main(params)
+    ret = (ModbusMessage.main(params, standalone_mode=False))
     print (ret)
 
 if __name__ == '__main__':

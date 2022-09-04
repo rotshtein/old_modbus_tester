@@ -20,8 +20,8 @@ def main(address:int, comport:int, baudrate:int, verbose:bool):
         params.append(str(baudrate))
     if verbose:
         params.append('-V')
-    ModbusMessage.main(params)
-    print('*************************')
+    ret = ModbusMessage.main(params, standalone_mode=False)
+    print (ret)
 
 if __name__ == '__main__':
     main()

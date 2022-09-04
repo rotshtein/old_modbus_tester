@@ -2,6 +2,8 @@
 import ModbusMessage
 import click
 
+error to disable use of this script!!!
+
 @click.command()
 @click.option('--hwver','-d', type=int, required=True, help='VMA modbus address')
 @click.option('--ComPort', '-P', type=str, help='Comm port name')

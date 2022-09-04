@@ -20,8 +20,10 @@ def main(address:int, comport:int, baudrate:int, verbose:bool):
         params.append(str(baudrate))
     if verbose:
         params.append('-V')
-    print('[CH1-LSB,CH1-MSB]')
+    
     ret = (ModbusMessage.main(params, standalone_mode=False))
+    if isinstance(ret,list):
+        print('[CH1-LSB,CH1-MSB]')
     print (ret)
 
 if __name__ == '__main__':
