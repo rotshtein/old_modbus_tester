@@ -34,7 +34,7 @@ class ModbusMessage:
         self.modbus_instrument.serial.baudrate = baud_rate
         self.modbus_instrument.serial.parity = 'N'
         self.modbus_instrument.serial.stopbits = 1
-        self.modbus_instrument.serial.timeout = 5.5
+        self.modbus_instrument.serial.timeout = 2
         """_summary_
         """        
         self.modbus_instrument.debug = Debug
